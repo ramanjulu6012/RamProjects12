@@ -44,7 +44,8 @@
 	
 	 	<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>mysql-jdbc</artifactId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>10.2.3.jre8</version>
 			<scope>runtime</scope>
 		</dependency>
 
