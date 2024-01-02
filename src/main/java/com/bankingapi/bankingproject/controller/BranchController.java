@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bankingapi.bankingproject.BankingProjectApplication;
+import com.bankingapi.bankingproject.BankingApplication;
 import com.bankingapi.bankingproject.Service.BranchMasterService;
 import com.bankingapi.bankingproject.model.BranchMaster;
 
@@ -26,7 +26,7 @@ public class BranchController {
 	@Autowired
 	BranchMasterService _BranchMasterService;
 
-	Logger logger = LoggerFactory.getLogger(BankingProjectApplication.class);
+	Logger logger = LoggerFactory.getLogger(BankingApplication.class);
 
 
 	@GetMapping("/branch")

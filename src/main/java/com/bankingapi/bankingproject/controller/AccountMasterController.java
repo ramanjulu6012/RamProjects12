@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bankingapi.bankingproject.BankingProjectApplication;
+import com.bankingapi.bankingproject.BankingApplication;
 import com.bankingapi.bankingproject.Service.AccountMasterService;
 import com.bankingapi.bankingproject.model.AccountMaster;
 
@@ -26,7 +26,7 @@ public class AccountMasterController {
 	@Autowired
 	AccountMasterService _AccountMasterService;
 
-	Logger logger = LoggerFactory.getLogger(BankingProjectApplication.class);
+	Logger logger = LoggerFactory.getLogger(BankingApplication.class);
 
 
 	@GetMapping("/account/{account}")

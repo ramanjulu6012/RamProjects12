@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.bankingapi.bankingproject.BankingProjectApplication;
+import com.bankingapi.bankingproject.BankingApplication;
 import com.bankingapi.bankingproject.Service.TransactionMasterService;
 import com.bankingapi.bankingproject.model.TransactionMaster;
 
@@ -24,7 +24,7 @@ public class TransactionMasterController {
     @Autowired
     TransactionMasterService _TransactionMasterService;
 
-    Logger logger = LoggerFactory.getLogger(BankingProjectApplication.class);
+    Logger logger = LoggerFactory.getLogger(BankingApplication.class);
 
     @PostMapping("/transaction")
     public ResponseEntity<TransactionMaster> Save(@RequestBody TransactionMaster cm) {

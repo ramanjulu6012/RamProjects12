@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bankingapi.bankingproject.BankingProjectApplication;
+import com.bankingapi.bankingproject.BankingApplication;
 import com.bankingapi.bankingproject.Service.CustomerService;
 import com.bankingapi.bankingproject.Service.CustomerBeneficiariesService;
 import com.bankingapi.bankingproject.model.CustomerMaster;
@@ -33,7 +33,7 @@ public class CustomerMasterController {
 	@Autowired
 	CustomerBeneficiariesService _BeneficiariesService;
 
-	Logger logger = LoggerFactory.getLogger(BankingProjectApplication.class);
+	Logger logger = LoggerFactory.getLogger(BankingApplication.class);
 
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<Optional<CustomerMaster>> getcustomer(@PathVariable("id") Integer id) {

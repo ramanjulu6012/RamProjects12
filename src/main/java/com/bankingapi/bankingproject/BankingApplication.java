@@ -6,12 +6,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 //@EnableSwagger2
-public class BankingProjectApplication {
+public class BankingApplication {
 
 	
 
 	public static void main(String[] args) {
-		SpringApplication.run(BankingProjectApplication.class, args);
+		SpringApplication.run(BankingApplication.class, args);
 		System.out.println("Spring Application Started.....");
 	}
 

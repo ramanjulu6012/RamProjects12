@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.bankingapi.bankingproject.BankingProjectApplication;
+import com.bankingapi.bankingproject.BankingApplication;
 import com.bankingapi.bankingproject.Service.CustomerLoginService;
 import com.bankingapi.bankingproject.model.CustomerLogin;
 import com.bankingapi.bankingproject.model.CustomerMaster;
@@ -30,7 +30,7 @@ public class CustomerLoginController {
     @Autowired
     CustomerLoginService _CustomerLoginService;
 
-    Logger logger = LoggerFactory.getLogger(BankingProjectApplication.class);
+    Logger logger = LoggerFactory.getLogger(BankingApplication.class);
 
     @GetMapping("/login")
     public ResponseEntity<CustomerLogin> CustomerLogin(@RequestBody CustomerLogin UserObj) {

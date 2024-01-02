@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bankingapi.bankingproject.BankingProjectApplication;
+import com.bankingapi.bankingproject.BankingApplication;
 import com.bankingapi.bankingproject.Service.EmployeeService;
 import com.bankingapi.bankingproject.model.EmployeeLogin;
 import com.bankingapi.bankingproject.model.EmployeeMaster;
@@ -27,7 +27,7 @@ public class EmployeeMasterController {
     @Autowired
     EmployeeService _EmployeeService;
 
-    Logger logger = LoggerFactory.getLogger(BankingProjectApplication.class);
+    Logger logger = LoggerFactory.getLogger(BankingApplication.class);
 
     @GetMapping("/employee")
 	public ResponseEntity<List<EmployeeMaster>> getbranch(@RequestParam(required = false) Integer id) {
