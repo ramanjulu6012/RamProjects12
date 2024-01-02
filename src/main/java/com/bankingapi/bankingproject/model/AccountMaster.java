@@ -55,6 +55,11 @@ public class AccountMaster  implements Serializable {
         this.openbyuser = openbyuser;
         this.closedbyuser = closedbyuser;
     }
+
+    public AccountMaster(int accountno, float balance ) {
+        this.accountno = accountno;
+        this.balance = balance;
+    }
     public int getAccountno() {
         return accountno;
     }

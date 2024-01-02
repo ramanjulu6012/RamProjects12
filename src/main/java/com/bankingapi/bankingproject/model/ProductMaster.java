@@ -4,7 +4,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Product_Master")
+@Table(name = "product_master")
 public class ProductMaster  {
     @Id
     private int ProductCode;

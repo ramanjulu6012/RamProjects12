@@ -7,13 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Customer_Master") 
+@Table(name = "customer_master") 
 public class CustomerMaster {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerid ;
 	private String panno;
-	private String  aadharno;
+	private String  aadhaarno;
 	private Date  dob ;
 	private String  longname ;
 	private String  gender;
@@ -29,12 +29,12 @@ public class CustomerMaster {
     public CustomerMaster() {
     }
 
-    public CustomerMaster(int customerid, String panno, String aadharno, Date dob, String longname, String gender,
+    public CustomerMaster(int customerid, String panno, String aadhaarno, Date dob, String longname, String gender,
             String mobile, String emailid, String address1, String address2, String address3, String city, int isactive,
             String password) {
         this.customerid = customerid;
         this.panno = panno;
-        this.aadharno = aadharno;
+        this.aadhaarno = aadhaarno;
         this.dob = dob;
         this.longname = longname;
         this.gender = gender;
@@ -46,6 +46,25 @@ public class CustomerMaster {
         this.city = city;
         this.isactive = isactive;
         this.password = password;
+    }
+
+     public CustomerMaster(int customerid, String panno, String aadhaarno, Date dob, String longname, String gender,
+            String mobile, String emailid, String address1, String address2, String address3, String city, int isactive
+            ) {
+        this.customerid = customerid;
+        this.panno = panno;
+        this.aadhaarno = aadhaarno;
+        this.dob = dob;
+        this.longname = longname;
+        this.gender = gender;
+        this.mobile = mobile;
+        this.emailid = emailid;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.address3 = address3;
+        this.city = city;
+        this.isactive = isactive;
+        
     }
 
     public int getCustomerid() {
@@ -64,12 +83,12 @@ public class CustomerMaster {
         this.panno = panno;
     }
 
-    public String getAadharno() {
-        return aadharno;
+    public String getaadhaarno() {
+        return aadhaarno;
     }
 
-    public void setAadharno(String aadharno) {
-        this.aadharno = aadharno;
+    public void setaadhaarno(String aadhaarno) {
+        this.aadhaarno = aadhaarno;
     }
 
     public Date getDob() {

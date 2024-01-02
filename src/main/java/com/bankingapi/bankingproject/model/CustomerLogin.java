@@ -2,8 +2,9 @@ package com.bankingapi.bankingproject.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
-@Table(name = "Customer_Login")
+@Table(name = "customer_login")
 public class CustomerLogin {
     @Id
     int customerid;

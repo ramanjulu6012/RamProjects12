@@ -1,6 +1,8 @@
 package com.bankingapi.bankingproject.controller;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bankingapi.bankingproject.BankingProjectApplication;
 import com.bankingapi.bankingproject.Service.EmployeeService;
 import com.bankingapi.bankingproject.model.EmployeeLogin;
 import com.bankingapi.bankingproject.model.EmployeeMaster;
@@ -18,11 +22,12 @@ import com.bankingapi.bankingproject.model.EmployeeMaster;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/employee")
-public class EmployeeMaterController {
+public class EmployeeMasterController {
 
     @Autowired
     EmployeeService _EmployeeService;
 
+    Logger logger = LoggerFactory.getLogger(BankingProjectApplication.class);
 
     @GetMapping("/employee")
 	public ResponseEntity<List<EmployeeMaster>> getbranch(@RequestParam(required = false) Integer id) {

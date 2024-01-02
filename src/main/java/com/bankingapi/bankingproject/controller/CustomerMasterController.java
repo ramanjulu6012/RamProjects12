@@ -1,5 +1,10 @@
 package com.bankingapi.bankingproject.controller;
+
+import java.util.List;
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bankingapi.bankingproject.BankingProjectApplication;
 import com.bankingapi.bankingproject.Service.CustomerService;
+import com.bankingapi.bankingproject.Service.CustomerBeneficiariesService;
 import com.bankingapi.bankingproject.model.CustomerMaster;
+import com.bankingapi.bankingproject.model.CustomerBeneficiaries;
 import com.bankingapi.bankingproject.model.EmployeeLogin;
 
 @CrossOrigin(origins = "*")
@@ -20,82 +29,81 @@ import com.bankingapi.bankingproject.model.EmployeeLogin;
 public class CustomerMasterController {
 	@Autowired
 	CustomerService _CustomerService;
-	// CustomerMasterRepo _CustomerMasterRepo;
+
+	@Autowired
+	CustomerBeneficiariesService _BeneficiariesService;
+
+	Logger logger = LoggerFactory.getLogger(BankingProjectApplication.class);
 
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<Optional<CustomerMaster>> getcustomer(@PathVariable("id") Integer id) {
-		// Optional<CustomerMaster> ObjData = _CustomerMasterRepo.findById(id);
-		// if (ObjData.isPresent()) {
-		// 	return new ResponseEntity<>(ObjData.get(), HttpStatus.OK);
-		// } else {
-		// 	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		// }
-
 		Optional<CustomerMaster> ObjAcctount = _CustomerService.GetCustomer(id);
 		if (ObjAcctount.isPresent()) {
+			logger.info("INFO | Get customer Success " + id);
 			return new ResponseEntity<>(ObjAcctount, HttpStatus.OK);
 		} else {
+			logger.error("Error | Customer not found " + id);
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-
-
-
 	}
 
-	// @GetMapping("/customer")
-	// public ResponseEntity<List<CustomerMaster>> getcustomers(@RequestParam(required = false) Integer id) {
-	// 	try {
-	// 		List<CustomerMaster> Obj = new ArrayList<CustomerMaster>();
-	// 		if (id == null) {
-	// 			_CustomerMasterRepo.findAll().forEach(Obj::add);
-	// 		} else {
-	// 			_CustomerMasterRepo.findBycustomerid(id).forEach(Obj::add);
-	// 		}
-	// 		if (Obj.isEmpty()) {
-	// 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	// 		}
-	// 		return new ResponseEntity<>(Obj, HttpStatus.OK);
-	// 	} catch (Exception e) {
-	// 		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-	// 	}
-	// }
-
-
-	 @PostMapping("/login")
-    public ResponseEntity<CustomerMaster> EmployeeLogin(@RequestBody EmployeeLogin emp){ 
-        CustomerMaster Obj =  _CustomerService.findEmployeebyId(emp.getUserid(),emp.getPassword());
-        if (Obj == null) {
-            return  new ResponseEntity<>(HttpStatus.NOT_FOUND); 
-        };
-        return  new ResponseEntity<>(Obj, HttpStatus.OK);
-    }
-
+	@PostMapping("/login")
+	public ResponseEntity<CustomerMaster> EmployeeLogin(@RequestBody EmployeeLogin emp) {
+		CustomerMaster Obj = _CustomerService.findEmployeebyId(emp.getUserid(), emp.getPassword());
+		if (Obj == null) {
+			logger.error("Error | Post Login Fail " + emp.getUserid());
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		logger.info("INFO | Post Login Success " + emp.getUserid());
+		return new ResponseEntity<>(Obj, HttpStatus.OK);
+	}
 
 	@PostMapping("/customer")
 	public ResponseEntity<CustomerMaster> AddUpdateCustomer(@RequestBody CustomerMaster cm) {
 		try {
-			CustomerMaster ObjCust= _CustomerService.saveCustomer(cm);
+			CustomerMaster ObjCust = _CustomerService.saveCustomer(cm);
+			logger.info("Info | Post CustomerMaster add/update Success " + cm.getCustomerid());
 			return new ResponseEntity<>(ObjCust, HttpStatus.OK);
 		} catch (Exception e) {
+			logger.error("Error | Post CustomerMaster add/update Fail " + cm.getCustomerid());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
 
-		// CustomerMaster Cust = new CustomerMaster();
-		// Cust.setCustomerid(cm.getCustomerid());
-		// Cust.setAadharno(cm.getAadharno());
-		// Cust.setAddress1(cm.getAddress1());
-		// Cust.setAddress2(cm.getAddress2());
-		// Cust.setAddress3(cm.getAddress3());
-		// Cust.setCity(cm.getCity());
-		// Cust.setDob(cm.getDob());
-		// Cust.setEmailid(cm.getEmailid());
-		// Cust.setGender(cm.getGender());
-		// Cust.setLongname(cm.getLongname());
-		// Cust.setMobile(cm.getMobile());
-		// Cust.setPanno(cm.getPanno());
-		// _CustomerMasterRepo.save(Cust);
+	@PostMapping("/validatecustbyidandpan")
+	public ResponseEntity<CustomerMaster> ValidateCustomerbyIdandPAN(@RequestBody CustomerMaster cm) {
+		try {
+			CustomerMaster ObjCust = _CustomerService.ValidateCustbyCustomerIdAndPan(cm.getCustomerid(), cm.getPanno());
+			logger.info("Info | Post validatecustbyidandpan Success " + cm.getCustomerid());
+			return new ResponseEntity<>(ObjCust, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error | Post validatecustbyidandpan Fail " + cm.getCustomerid());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-		// return new ResponseEntity<>(Cust, HttpStatus.OK);
+	@PostMapping("/addbenef")
+	public ResponseEntity<CustomerBeneficiaries> AddCustomerBenf(@RequestBody CustomerBeneficiaries cm) {
+		try {
+			CustomerBeneficiaries ObjCust = _BeneficiariesService.save(cm);
+			logger.info("Info | Post addbenef Success " + cm.getCustomerid());
+			return new ResponseEntity<>(ObjCust, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error | Post addbenef Fail " + cm.getCustomerid());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/customerbenf/{id}")
+	public ResponseEntity<List<CustomerBeneficiaries>> getcustomerBenf(@PathVariable("id") Integer id) {
+		List<CustomerBeneficiaries> ObjAcctount = _CustomerService.GetBenbyCustomerId(id);
+		if (ObjAcctount != null) {
+			logger.info("Info | Get customerbenf Success " + id);
+			return new ResponseEntity<>(ObjAcctount, HttpStatus.OK);
+		} else {
+			logger.error("Error | Post customerbenf Fail " + id);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 }
